@@ -1,0 +1,12 @@
+<div class="small-12 medium-4 columns"><img ng-src="{{product.product.image}}" alt=""/></div>
+<div class="small-12 medium-8 columns">
+    <dl class="sub-nav">
+        <dt>
+            <h2>{{product.name}}  </h2>
+            <button class="button right even" ng-click="product.addToCart(product.product)">$ {{product.product.price}} / {{product.product.unit}}</button>
+        </dt>
+
+    </dl>
+
+    <div class="panel callout">{{product.product.description}}</div>
+</div>

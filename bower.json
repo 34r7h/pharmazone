@@ -1,0 +1,18 @@
+{
+  "name": "pharzone",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "~1.4.*",
+    "angular-foundation": "~0.3.0",
+    "angular-ui-router": "~0.2.10",
+    "foundation": "~5.4.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.*"
+  },
+  "overrides": {
+    "modernizr": {
+      "main": "modernizr.js"
+    }
+  }
+}

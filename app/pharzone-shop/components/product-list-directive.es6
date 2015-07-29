@@ -29,10 +29,12 @@
       replace: false,
       controllerAs: 'productList',
       controller(PharzoneShop) {
-        $log.debug('Testing PharzoneShop service from product-list directive', PharzoneShop.test)
+        $log.debug('Testing PharzoneShop service from product-list directive', PharzoneShop.test);
         let vm = this;
         vm.name = 'productList';
+        vm.addToCart = PharzoneShop.addToCart;
         vm.products = PharzoneShop.products;
+        vm.cart = PharzoneShop.cart;
       },
       link(scope, element, attrs) {
         /*jshint unused:false */

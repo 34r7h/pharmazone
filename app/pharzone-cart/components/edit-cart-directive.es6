@@ -32,6 +32,9 @@
         $log.debug('Testing PharzoneCart service from edit-cart directive', PharzoneCart.test);
         let vm = this;
         vm.name = 'editCart';
+        vm.cart = PharzoneCart.cart;
+        vm.cartTotal = PharzoneCart.cartTotal;
+	      vm.checkout = PharzoneCart.checkout;
       },
       link(scope, element, attrs) {
         /*jshint unused:false */

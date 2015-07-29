@@ -2,8 +2,15 @@
 <div class="small-12 medium-8 columns">
     <dl class="sub-nav">
         <dt>
-            <h2>{{product.name}}  </h2>
-            <button class="button right even" ng-click="product.addToCart(product.product)">$ {{product.product.price}} / {{product.product.unit}}</button>
+            <h2>{{product.name}}  - $ {{product.product.price}} / {{product.product.unit}} </h2>
+            <div class="row collapse text-right">
+                <div class="small-4 columns">
+                    <input type="number" ng-model="qty" placeholder="qty"/>
+                </div>
+                <div class="small-8 columns">
+                    <a class="button postfix" ng-click="product.addToCart(product.product, product.cart, qty)"><h3>Order Now</h3></a>
+                </div>
+            </div>
         </dt>
 
     </dl>

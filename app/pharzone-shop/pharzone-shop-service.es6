@@ -2,10 +2,10 @@
   'use strict';
 
   class PharzoneShop {
-    constructor(Pharzone, $log) {
+    constructor(Pharzone, $log, PharzoneCart) {
       this.test = Pharzone.test;
       this.products = Pharzone.data.products;
-
+      this.cart = PharzoneCart.cart;
       var productsIndex = {};
       angular.forEach(Pharzone.data.products,function(product){
         productsIndex[product.url]=product;
@@ -26,7 +26,7 @@
       this.usersIndex = usersIndex;
       this.deals = deals;
       $log.debug(this.usersIndex, this.deals);
-
+      this.cart = Pharzone.cart;
       this.addToCart = Pharzone.api.addToCart;
     }
 

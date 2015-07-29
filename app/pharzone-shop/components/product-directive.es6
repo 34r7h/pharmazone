@@ -35,6 +35,7 @@
         vm.product = PharzoneShop.productsIndex[url];
         vm.name = vm.product.name;
         vm.addToCart = PharzoneShop.addToCart;
+        vm.cart = PharzoneShop.cart
 
       },
       link(scope, element, attrs) {

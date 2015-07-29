@@ -1,1 +1,49 @@
-<div>{{editCart.name}}</div>
+<div class="row"><h3 ng-if="editCart.cartTotal(editCart.cart)  <= 0">No Items Yet, Click the shop link above to view our current selection</h3></div>
+<table ng-if="editCart.cartTotal(editCart.cart) > 0">
+    <caption>Items currently in cart</caption>
+    <tr>
+        <th id="item"><!--item--></th>
+        <th id="image"><!-- image--></th>
+        <th id="qty">Qty</th>
+        <th id="cost">Cost</th>
+        <th id="price">Total Price</th>
+        <th id="checkout"><!--checkout--></th>
+    </tr>
+    <tr ng-repeat="(key, item) in editCart.cart" ng-if="item.qty > 0">
+        <th id="{{key}}" headers="item">{{key}}</th>
+        <td headers="image">
+            <div class="row">
+                <div class="small-3 columns">
+                    <img ng-src="{{item.image}}">
+                </div>
+                <div class="small-9 columns">
+                    {{item.description}}
+                </div>
+            </div>
+        </td>
+        <td headers="qty">
+            <div class="row collapse prefix-radius">
+                <div class="small-9 columns">
+                    <input type="number" ng-model="item.qty"/>
+                </div>
+                <div class="small-3 columns">
+                    <span class="postfix">{{item.unit}}</span>
+                </div>
+            </div>
+        </td>
+        <td headers="cost">{{item.price | currency}} / {{item.unit}}</td>
+        <td headers="total">{{item.price * item.qty | currency}}</td>
+    </tr>
+    <tr>
+        <td headers=""></td>
+        <th id="sub-total" class="text-right">
+            <h4>
+                Sub-total
+                <b>{{editCart.cartTotal(editCart.cart) | currency}}</b>
+            </h4>
+        </th>
+        <td headers="checkout" colspan="3" ng-init="orderTotal = editCart.cartTotal(editCart.cart);">{{orderTotal}}
+            <a ng-click="editCart.checkout(editCart.cart, orderTotal)" class="button expand">Checkout</a>
+        </td>
+    </tr>
+</table>

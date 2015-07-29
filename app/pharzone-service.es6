@@ -4,6 +4,7 @@
   class Pharzone {
     constructor($log) {
       this.test = 'ALL SYSTEMS OPERATIONAL';
+      this.cart = {};
       this.data = {
         products: [
           {
@@ -113,12 +114,43 @@
 		          ]
 	          }
           }
+        ],
+        orders:[
+          {
+            items:{},
+            total:100,
+            user:'me'
+          }
         ]
       };
 	    this.api = {
-		    addToCart: (product) => {
-		      $log.info('adding to cart', product);
-	      }
+		    addToCart: (product, cart, qty) => {
+          if(!qty) qty = 1;
+		      $log.info('Adding', qty +' '+ product);
+          product['qty']= qty;
+          if(cart[product.name]){
+            console.log('Already in cart.');
+          } else {
+            cart[product.name]=product;
+            $log.info('To cart', cart);
+            return cart;
+          }
+
+	      },
+        cartTotal: (items) => {
+          $log.debug('calculating totals', items);
+          var total = 0;
+          angular.forEach(items, (item)=>{
+            var itemTotal = item.price * item.qty;
+            total = total + itemTotal;
+          });
+          return total;
+        },
+        checkout: (order, orderTotal) => {
+          order.total = orderTotal;
+          this.data.orders.push(order);
+          $log.debug(this.data.orders, 'orderTotal')
+        }
 	    }
     }
 

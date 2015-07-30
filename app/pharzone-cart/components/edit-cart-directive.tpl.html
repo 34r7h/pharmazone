@@ -42,7 +42,7 @@
                 <b>{{editCart.cartTotal(editCart.cart) | currency}}</b>
             </h4>
         </th>
-        <td headers="checkout" colspan="3" ng-init="orderTotal = editCart.cartTotal(editCart.cart);">{{orderTotal}}
+        <td headers="checkout" colspan="3" ng-init="orderTotal = editCart.cartTotal(editCart.cart);">
             <a ng-click="editCart.checkout(editCart.cart, orderTotal)" class="button expand">Checkout</a>
         </td>
     </tr>

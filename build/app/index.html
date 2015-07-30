@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='en' data-ng-app='pharzone'>
+  <head>
+    <title>pharzone</title>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
+    <!-- inject:head:js -->
+    <!-- endinject -->
+    <!-- inject:html -->
+    <!-- endinject -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="vendor/foundation/css/foundation.css">
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/pharzone-cart/pharzone-cart.css">
+    <link rel="stylesheet" href="css/pharzone-dashboard/pharzone-dashboard.css">
+    <link rel="stylesheet" href="css/pharzone-home/pharzone-home.css">
+    <link rel="stylesheet" href="css/pharzone-shop/pharzone-shop.css">
+    <!-- endinject -->
+  </head>
+  <body>
+
+    <div data-top-bar>
+      <ul class='title-area'>
+        <li class='name'>
+          <h1>
+            <a href='#/'>pharzone</a>
+          </h1>
+        </li>
+        <li class='menu-icon' data-toggle-top-bar>
+          <a href='#/'>
+            <span></span>
+          </a>
+        </li>
+      </ul>
+
+      <div data-top-bar-section>
+        <ul class='left'>
+          <li data-ui-sref-active='active'>
+            <a data-ui-sref='pharzone.home'>Home</a>
+          </li>
+          <li data-ui-sref-active='active'>
+            <a data-ui-sref='pharzone.shop.list'>Shop</a>
+          </li>
+          <li data-ui-sref-active='active'>
+            <a data-ui-sref='pharzone.dashboard'>Dashboard</a>
+          </li>
+          <li data-ui-sref-active='active'>
+            <a data-ui-sref='pharzone.cart'>Cart</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-ui-view>
+
+    </div>
+
+    <!-- bower:js -->
+    <script src="vendor/modernizr/modernizr.js"></script>
+    <script src="vendor/jquery/dist/jquery.js"></script>
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-foundation/mm-foundation-tpls.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendor/fastclick/lib/fastclick.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="vendor/jquery-placeholder/jquery.placeholder.js"></script>
+    <script src="vendor/foundation/js/foundation.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    <script src="js/pharzone-shop/pharzone-shop-module.js"></script>
+    <script src="js/pharzone-shop/pharzone-shop-service.js"></script>
+    <script src="js/pharzone-shop/pharzone-shop-routes.js"></script>
+    <script src="js/pharzone-home/pharzone-home-module.js"></script>
+    <script src="js/pharzone-home/pharzone-home-service.js"></script>
+    <script src="js/pharzone-home/pharzone-home-routes.js"></script>
+    <script src="js/pharzone-dashboard/pharzone-dashboard-module.js"></script>
+    <script src="js/pharzone-dashboard/pharzone-dashboard-service.js"></script>
+    <script src="js/pharzone-dashboard/pharzone-dashboard-routes.js"></script>
+    <script src="js/pharzone-cart/pharzone-cart-module.js"></script>
+    <script src="js/pharzone-cart/pharzone-cart-service.js"></script>
+    <script src="js/pharzone-cart/pharzone-cart-routes.js"></script>
+    <script src="js/app-module.js"></script>
+    <script src="js/pharzone-service.js"></script>
+    <script src="js/app-routes.js"></script>
+    <script src="js/pharzone-shop/components/product-list-directive.js"></script>
+    <script src="js/pharzone-shop/components/product-directive.js"></script>
+    <script src="js/pharzone-dashboard/components/edit-products-directive.js"></script>
+    <script src="js/pharzone-dashboard/components/account-directive.js"></script>
+    <script src="js/pharzone-cart/components/payment-directive.js"></script>
+    <script src="js/pharzone-cart/components/edit-cart-directive.js"></script>
+    <!-- endinject -->
+  </body>
+</html>

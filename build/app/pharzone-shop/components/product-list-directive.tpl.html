@@ -1,0 +1,28 @@
+<dl class="sub-nav">
+    <dd>
+        <div class="row collapse postfix-round">
+            <div class="small-9 columns">
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="small-3 columns">
+                <a href="#" class="button postfix round info">Go</a>
+            </div>
+        </div>
+    </dd>
+
+</dl>
+<div ng-repeat="product in productList.products" class="large-4 medium-6 small-12 columns">
+    <div class="panel">
+        <h3>{{product.name}}</h3>
+        <p class="">
+            <img ng-src="{{product.image}}" alt="" class="th" style="height:200px; width:100%" />
+        </p>
+        <h4 class="text-right">$ {{product.price}} / {{product.unit}}</h4>
+        <hr/>
+        <input class="small-1 columns" type="number" ng-model="qty" placeholder="How many would you like to order?"/>
+        <ul class="button-group round even text-right">
+            <li><a ng-href="#/shop/{{product.url}}" class="button info">More Info</a></li>
+            <li><a class="button" ng-click="productList.addToCart(product, productList.cart, qty)">Buy Now</a></li>
+        </ul>
+    </div>
+</div>

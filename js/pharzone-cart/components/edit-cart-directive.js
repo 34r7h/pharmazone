@@ -28,13 +28,32 @@
       templateUrl: 'pharzone-cart/components/edit-cart-directive.tpl.html',
       replace: false,
       controllerAs: 'editCart',
-      controller: function controller(PharzoneCart) {
+      controller: function controller($scope, PharzoneCart) {
         $log.debug('Testing PharzoneCart service from edit-cart directive', PharzoneCart.test);
         var vm = this;
+        // let db = PharzoneCart.db;
         vm.name = 'editCart';
+        vm.db = {};
         vm.cart = PharzoneCart.cart;
         vm.cartTotal = PharzoneCart.cartTotal;
         vm.checkout = PharzoneCart.checkout;
+        vm.getTime = PharzoneCart.getTime;
+        /*
+                var getDb = (()=> {
+                  setTimeout(()=> {
+                    if (db.$$state.value) {
+                      $scope.$apply(function() {
+                        vm.db = db.$$state.value;
+                        /!*vm.db['products'] = ;
+                        vm.db.$save();*!/
+                      });
+                    } else {
+                      getDb();
+                    }
+        
+                  }, 500);
+                })();
+        */
       },
       link: function link(scope, element, attrs) {
         /*jshint unused:false */

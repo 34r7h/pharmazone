@@ -8,13 +8,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   'use strict';
 
   var PharzoneCart = (function () {
-    function PharzoneCart(Pharzone) {
+    function PharzoneCart(Pharzone, $log) {
       _classCallCheck(this, PharzoneCart);
 
       this.test = Pharzone.test;
       this.cart = Pharzone.cart;
+      // this.db = Pharzone.data.db();
       this.cartTotal = Pharzone.api.cartTotal;
       this.checkout = Pharzone.api.checkout;
+      this.getTime = Pharzone.api.getTime;
+      this.promise = Pharzone.api.promise;
+      // this.orders = Pharzone.data.orders;
+      this.orders = this.promise(this, Pharzone.data.orders);
     }
 
     /**

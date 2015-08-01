@@ -1,5 +1,8 @@
 # pharzone
 
+// TODO
+Refill lost database with true admin.
+
 *Generated with [ng-poly](https://github.com/dustinspecker/generator-ng-poly/tree/v0.10.5) version 0.10.5*
 
 ## Setup

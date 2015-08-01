@@ -34,14 +34,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.cart = {};
       this.index = { products: {}, users: {}, orders: {} };
       this.data = {
-        db: function db() {
+        db: (function () {
           var ref = new Firebase('https://pharzone.firebaseio.com/');
           var dbObj = $firebaseObject(ref).$loaded().then(function (data) {
             $log.debug('dbObj', data);
             return data;
           });
           return dbObj;
-        },
+        })(),
         products: (function () {
           var ref = new Firebase('https://pharzone.firebaseio.com/products');
           var dbObj = $firebaseObject(ref).$loaded().then(function (data) {
@@ -64,15 +64,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
           return dbObj;
         })(),
-        orders: function orders() {
+        orders: (function () {
           var ref = new Firebase('https://pharzone.firebaseio.com/orders');
           var dbObj = $firebaseObject(ref).$loaded().then(function (data) {
             $log.debug('ordersObj', data);
             return data;
           });
           return dbObj;
-        }
+        })()
       };
+      this.db = {};
+      angular.forEach(this.data, function (method, key) {
+        $log.log(method, key);
+        _this.db[key] = method;
+      });
+      $log.log('this.db', this.db);
 
       this.api = {
         promise: function promise(target, data) {

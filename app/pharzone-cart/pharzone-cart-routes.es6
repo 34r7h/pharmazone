@@ -9,7 +9,17 @@
     $stateProvider
       .state('pharzone.cart', {
         url: '/cart',
-        template: '<edit-cart></edit-cart><ui-view></ui-view>'
+        template: '<edit-cart></edit-cart><ui-view></ui-view>',
+        resolve:{
+          orders: (Pharzone)=>{
+            return Pharzone.db.orders;
+          }
+        },
+        controllerAs: 'cartCtrl',
+        controller: ($scope, orders)=>{
+          let vm = this;
+          $scope.orders = orders;
+        }
       })
       .state('pharzone.cart.payment', {
         url: '/:order',

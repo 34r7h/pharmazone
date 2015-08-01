@@ -24,14 +24,14 @@
       this.cart = {};
       this.index = {products:{},users:{},orders:{}};
       this.data = {
-	      db: ()=>{
+	      db: (()=>{
 		      let ref = new Firebase('https://pharzone.firebaseio.com/');
 		      var dbObj = $firebaseObject(ref).$loaded().then((data)=>{
 			      $log.debug('dbObj', data);
 			      return data;
 		      });
 		      return dbObj;
-	      },
+	      })(),
         products: (()=>{
           let ref = new Firebase('https://pharzone.firebaseio.com/products');
           var dbObj = $firebaseObject(ref).$loaded().then((data)=>{
@@ -54,15 +54,21 @@
           });
           return dbObj;
         })(),
-        orders:  ()=>{
+        orders:  (()=>{
           let ref = new Firebase('https://pharzone.firebaseio.com/orders');
           var dbObj = $firebaseObject(ref).$loaded().then((data)=>{
             $log.debug('ordersObj', data);
             return data;
           });
           return dbObj;
-        }
+        })()
       };
+      this.db = {};
+      angular.forEach(this.data, (method, key)=>{
+        $log.log(method, key);
+        this.db[key] = method;
+      });
+      $log.log('this.db',this.db);
 
 	    this.api = {
         promise: (target, data)=> {

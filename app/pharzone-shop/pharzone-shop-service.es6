@@ -4,7 +4,7 @@
   class PharzoneShop {
     constructor(Pharzone, $log, PharzoneCart) {
       this.test = Pharzone.test;
-      this.db = Pharzone.data.db();
+      this.db = Pharzone.data.db;
       this.products = Pharzone.data.products;
       this.cart = PharzoneCart.cart;
 

@@ -8,6 +8,7 @@
    */
   angular
     .module('pharzone', [
+      'firebase',
       'ui.router',
       'mm.foundation',
       'pharzoneHome',

@@ -1,9 +1,18 @@
-<div class="row"><h3 ng-if="editCart.cartTotal(editCart.cart)  <= 0">No Items Yet, Click the shop link above to view our current selection</h3></div>
+<div class="row">
+    <h3 ng-if="editCart.cartTotal(editCart.cart)  <= 0">No Items Yet, Click the shop link above to view our current selection</h3>
+
+<!--<div ng-repeat="db in editCart.db">
+    <div ng-repeat="(key, db) in db">{{key}}: {{db}}
+        <hr/> </div>
+    <hr/>
+</div>-->
+
+</div>
 <table ng-if="editCart.cartTotal(editCart.cart) > 0">
     <caption>Items currently in cart</caption>
     <tr>
         <th id="item"><!--item--></th>
-        <th id="image"><!-- image--></th>
+        <th id="description"><!-- image--></th>
         <th id="qty">Qty</th>
         <th id="cost">Cost</th>
         <th id="price">Total Price</th>
@@ -11,20 +20,14 @@
     </tr>
     <tr ng-repeat="(key, item) in editCart.cart" ng-if="item.qty > 0">
         <th id="{{key}}" headers="item">{{key}}</th>
-        <td headers="image">
-            <div class="row">
-                <div class="small-3 columns">
-                    <img ng-src="{{item.image}}">
-                </div>
-                <div class="small-9 columns">
-                    {{item.description}}
-                </div>
-            </div>
+        <td headers="description">
+            {{item.description}}
         </td>
         <td headers="qty">
             <div class="row collapse prefix-radius">
                 <div class="small-9 columns">
                     <input type="number" ng-model="item.qty"/>
+                    <p><a ng-click="editCart.cartRemove(item)">Remove from cart</a></p>
                 </div>
                 <div class="small-3 columns">
                     <span class="postfix">{{item.unit}}</span>
@@ -43,7 +46,7 @@
             </h4>
         </th>
         <td headers="checkout" colspan="3" ng-init="orderTotal = editCart.cartTotal(editCart.cart);">
-            <a ng-click="editCart.checkout(editCart.cart, orderTotal)" class="button expand">Checkout</a>
+            <a ng-click="editCart.checkout(editCart.cart, orderTotal, editCart.getTime())" class="button expand">Checkout</a>
         </td>
     </tr>
 </table>

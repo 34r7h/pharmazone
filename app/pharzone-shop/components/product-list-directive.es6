@@ -28,13 +28,26 @@
       templateUrl: 'pharzone-shop/components/product-list-directive.tpl.html',
       replace: false,
       controllerAs: 'productList',
-      controller(PharzoneShop) {
+      controller(PharzoneShop, $scope) {
         $log.debug('Testing PharzoneShop service from product-list directive', PharzoneShop.test);
         let vm = this;
+        let db = PharzoneShop.db;
         vm.name = 'productList';
         vm.addToCart = PharzoneShop.addToCart;
-        vm.products = PharzoneShop.products;
         vm.cart = PharzoneShop.cart;
+        var getDb = ()=> {
+          setTimeout(()=> {
+            if (db.$$state.value) {
+              $scope.$apply( ()=> {
+                vm.products = db.$$state.value.products;
+                /*vm.products.push({name:'fasdf'});
+                db.$$state.value.$save();*/
+              });
+            } else {getDb();$log.debug('getting data..');}
+
+          }, 500);
+        };
+        getDb();
       },
       link(scope, element, attrs) {
         /*jshint unused:false */

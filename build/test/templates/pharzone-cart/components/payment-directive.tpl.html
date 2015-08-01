@@ -1,1 +1,10 @@
-<div>{{payment.name}}</div>
+<h2>Please choose your payment method.</h2>
+<h3>Total: {{payment.order.total}}</h3>
+
+<h4>Billing</h4>
+<input type="text" placeholder="name"/>
+
+<h4>Shipping</h4>
+<input type="text" placeholder="name"/>
+
+<button ng-click="payment.promise(payment, {me:'irth'})">Pay?</button>

@@ -14,7 +14,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, PharzoneShop);
 
       this.test = Pharzone.test;
-      this.db = Pharzone.data.db();
+      this.db = Pharzone.data.db;
       this.products = Pharzone.data.products;
       this.cart = PharzoneCart.cart;
 

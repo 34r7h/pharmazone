@@ -29,9 +29,24 @@
       replace: false,
       controllerAs: 'editProducts',
       controller(PharzoneDashboard, $scope) {
-        $log.debug('Testing PharzoneDashboard service from edit-products directive', PharzoneDashboard.test);
         let vm = this;
+        let db = PharzoneDashboard.db;
         vm.name = 'editProducts';
+        vm.newDeal = PharzoneDashboard.newDeal;
+        vm.save = PharzoneDashboard.save;
+        var getDb = ()=> {
+          setTimeout(()=> {
+            if (db.$$state.value) {
+              $scope.$apply( ()=> {
+                vm.products = db.$$state.value.products;
+                /*vm.products.push({name:'fasdf'});
+                 db.$$state.value.$save();*/
+              });
+            } else {getDb();}
+
+          }, 500);
+        };
+        getDb();
       },
       link(scope, element, attrs) {
         /*jshint unused:false */

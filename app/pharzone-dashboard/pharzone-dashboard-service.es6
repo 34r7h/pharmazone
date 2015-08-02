@@ -4,7 +4,10 @@
   class PharzoneDashboard {
     constructor(Pharzone) {
       this.test = Pharzone.test;
-
+      this.db = Pharzone.data.db;
+      this.newDeal = Pharzone.api.make;
+      this.save = Pharzone.api.save;
+      this.products = Pharzone.data.db.products;
     }
 
     get() {

@@ -29,7 +29,6 @@
       replace: false,
       controllerAs: 'editCart',
       controller($scope, PharzoneCart) {
-        $log.debug('Testing PharzoneCart service from edit-cart directive', PharzoneCart.test);
         let vm = this;
         // let db = PharzoneCart.db;
         vm.name = 'editCart';

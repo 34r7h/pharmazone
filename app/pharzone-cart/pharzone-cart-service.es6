@@ -3,6 +3,7 @@
 
   class PharzoneCart {
     constructor(Pharzone, $log) {
+      $log.log('PharzoneCart');
       this.test = Pharzone.test;
       this.cart = Pharzone.cart;
       // this.db = Pharzone.data.db();

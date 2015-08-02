@@ -13,7 +13,7 @@
       template: '<edit-cart></edit-cart><ui-view></ui-view>',
       resolve: {
         orders: function orders(Pharzone) {
-          return Pharzone.db.orders;
+          return Pharzone.data.db.orders;
         }
       },
       controllerAs: 'cartCtrl',

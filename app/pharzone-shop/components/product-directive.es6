@@ -46,8 +46,7 @@
                 /*vm.products.push({name:'fasdf'});
                  db.$$state.value.$save();*/
               });
-            } else {getDb();$log.debug('getting product directive data..');}
-
+            } else {getDb();}
           }, 500);
         })();
 

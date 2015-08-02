@@ -9,14 +9,11 @@
       this.cart = PharzoneCart.cart;
 
       var getDb = (()=>{
-        $log.debug('getDb() - pharzone-shop-service');
         setTimeout(()=>{
           if(Pharzone.data.products){
             let vm = this;
             vm.productsIndex = Pharzone.index.products;
-            $log.debug('vm.productsIndex', vm.productsIndex);
           } else {
-            $log.debug('Awaiting Data');
             getDb();
           }
         },500);
@@ -27,7 +24,6 @@
       var usersIndex = {}, deals = [], thisDeal = {};
 
       var getDb = (()=>{
-        $log.debug('getDb() - user jazz');
         setTimeout(()=>{
           if(Pharzone.data.users){
             let vm = this;
@@ -42,10 +38,7 @@
             });
             this.usersIndex = usersIndex;
             this.deals = deals;
-            $log.debug(this.usersIndex, this.deals);
-            $log.debug('vm.productsIndex', vm.productsIndex);
           } else {
-            $log.debug('Awaiting Data');
             getDb();
           }
         },500);

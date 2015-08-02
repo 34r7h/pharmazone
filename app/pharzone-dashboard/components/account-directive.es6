@@ -29,7 +29,6 @@
       replace: false,
       controllerAs: 'account',
       controller(PharzoneDashboard) {
-        $log.debug('Testing PharzoneDashboard service from account directive', PharzoneDashboard.test);
         let vm = this;
         vm.name = 'account';
       },

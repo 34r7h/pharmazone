@@ -47,7 +47,7 @@
                  db.$$state.value.$save();*/
               });
             } else {
-                getDb();$log.debug('getting product directive data..');
+                getDb();
               }
           }, 500);
         })();

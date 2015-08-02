@@ -1,76 +1,89 @@
 <div class="row">
-<h2>Add New Deal</h2>
-<form ng-init="newDeal = {}" ng-submit="editProducts.newDeal(newDeal)">
-    <div class="row">
-        <div class="large-6 columns">
-            <label>Product Name
-                <input type="text" placeholder="large-12.columns" ng-model="newDeal.name"/>
-            </label>
-        </div>
-        <div class="large-4 columns">
-            <div class="row collapse">
-                <label>Price</label>
-                <div class="small-4 columns">
-                    <span class="prefix">$</span>
-                </div>
-                <div class="small-8 columns">
-                    <input type="text" placeholder="large-3.columns" ng-model="newDeal.description"/>
+    <h2>Add New Deal</h2>
+    <form ng-init="newDeal = {}" ng-submit="editProducts.newDeal('products',newDeal)">
+        <div class="row">
+            <div class="large-6 columns">
+                <label>Product Name
+                    <input type="text" placeholder="Drug Name" ng-model="newDeal.name"/>
+                </label>
+                <label>Product Image Url
+                    <input type="text" placeholder="paste a url to the image" ng-model="newDeal.image"/>
+                </label>
+            </div>
+            <div class="large-4 columns">
+                <div class="row collapse">
+                    <label>Price</label>
+                    <div class="small-4 columns">
+                        <span class="prefix">$</span>
+                    </div>
+                    <div class="small-8 columns">
+                        <input type="text" placeholder="What is the deal?" ng-model="newDeal.price"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="large-8 columns">
-            <label>Product Description
-                <textarea placeholder="small-12.columns" ng-model="newDeal.description"></textarea>
-            </label>
+        <div class="row">
+            <div class="large-8 columns">
+                <label>Product Description
+                    <textarea placeholder="Describe details of the deal" ng-model="newDeal.description"></textarea>
+                </label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="large-4 columns">
-            <label>Select Drug Form
-                <select>
-                    <option value="pill">Pills</option>
-                    <option value="gelcaps">Gelcaps</option>
-                    <option value="suppository">Suppository</option>
-                    <option value="injection">Injection</option>
-                </select>
-            </label>
-        </div>
-        <div class="large-4 columns">
-            <div class="row collapse">
-                <label>Size</label>
-                <div class="small-8 columns">
-                    <input type="text" placeholder="large-3.columns" ng-model="newDeal.qty"/>
-                </div>
-                <div class="small-4 columns">
-                    <span class="postfix">
-                        <select>
-                            <option value="pill">mg</option>
-                            <option value="gelcaps">ml</option>
-                        </select>
-                    </span>
+        <div class="row">
+            <div class="large-4 columns">
+                <label>Select Drug Form
+                    <select ng-model="newDeal.drugForm">
+                        <option value="pill">Pills</option>
+                        <option value="gelcaps">Gelcaps</option>
+                        <option value="suppository">Suppository</option>
+                        <option value="injection">Injection</option>
+                    </select>
+                </label>
+            </div>
+            <div class="large-4 columns">
+                <div class="row collapse">
+                    <label>Size</label>
+                    <div class="small-8 columns">
+                        <input type="text" placeholder="How many of what size?" ng-model="newDeal.qty"/>
+                    </div>
+                    <div class="small-4 columns">
+                        <span class="postfix">
+                            <select ng-model="newDeal.units">
+                                <option value="mg">mg</option>
+                                <option value="ml">ml</option>
+                            </select>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="large-6 columns">
+                <label>Is this deal permanent or temporary?</label>
+                <input type="radio" name="deal-length" value="permanent" id="permanent" ng-model="newDeal.dealLength"><label for="permanent" >Permanent</label>
+                <input type="radio" name="deal-length" value="temporary" id="temporary"  ng-model="newDeal.dealLength"><label for="temporary">Temporary</label>
+                <label ng-show="newDeal.dealLength === 'temporary'"  for="deal-ends">When does the deal end?<input id="deal-ends" type="text" ng-model="newDeal.dealEnds"/></label>
+            </div>
+        </div>
+        <button type="submit">Add Deal</button>
+        {{newDeal}}
+
+
+    </form>
+
+    <h2>Edit deals</h2>
+    <div ng-repeat="product in editProducts.products" class="row">
+        <h4 class="large-9">{{product.name}}</h4>
+        <img class="large-3" ng-src="{{product.image}}" alt=""/>
+
+        <form ng-submit="editProducts.save('products', product)">
+            <div class="small-12 columns" ng-repeat="(key,input) in product" >
+                <label for="{{key}}">{{key}}</label>
+                <input id="{{key}}" ng-model="input"/>
+            </div>
+            <button type="submit">Save Changes</button>
+        </form>
     </div>
 
-    <div class="row">
-        <div class="large-6 columns">
-            <label>Is this deal permanent or temporary?</label>
-            <input type="radio" name="deal-length" value="permanent" id="permanent" ng-model="newDeal.dealLength"><label for="permanent" >Permanent</label>
-            <input type="radio" name="deal-length" value="temporary" id="temporary"  ng-model="newDeal.dealLength"><label for="temporary">Temporary</label>
-            <label ng-show="newDeal.dealLength === 'temporary'"  for="deal-ends">When does the deal end?<input id="deal-ends" type="text" ng-model="newDeal.dealEnds"/></label>
-        </div>
-        <div class="large-6 columns">
-            <label>Is this a permanent deal?</label>
-            <input id="checkbox1" type="checkbox"><label for="checkbox1">Yes</label>
-            <input id="checkbox2" type="checkbox"><label for="checkbox2">no</label>
-        </div>
-    </div>
-
-</form>
-
-<h2>Edit deals</h2>
 </div>

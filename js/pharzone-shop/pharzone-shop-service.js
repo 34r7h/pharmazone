@@ -19,14 +19,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.cart = PharzoneCart.cart;
 
       var getDb = (function () {
-        $log.debug('getDb() - pharzone-shop-service');
         setTimeout(function () {
           if (Pharzone.data.products) {
             var vm = _this;
             vm.productsIndex = Pharzone.index.products;
-            $log.debug('vm.productsIndex', vm.productsIndex);
           } else {
-            $log.debug('Awaiting Data');
             getDb();
           }
         }, 500);
@@ -39,7 +36,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           thisDeal = {};
 
       var getDb = (function () {
-        $log.debug('getDb() - user jazz');
         setTimeout(function () {
           if (Pharzone.data.users) {
             var vm = _this;
@@ -54,10 +50,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
             _this.usersIndex = usersIndex;
             _this.deals = deals;
-            $log.debug(_this.usersIndex, _this.deals);
-            $log.debug('vm.productsIndex', vm.productsIndex);
           } else {
-            $log.debug('Awaiting Data');
             getDb();
           }
         }, 500);

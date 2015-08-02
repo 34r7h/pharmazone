@@ -11,6 +11,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function PharzoneCart(Pharzone, $log) {
       _classCallCheck(this, PharzoneCart);
 
+      $log.log('PharzoneCart');
       this.test = Pharzone.test;
       this.cart = Pharzone.cart;
       // this.db = Pharzone.data.db();

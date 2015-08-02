@@ -29,7 +29,6 @@
       replace: false,
       controllerAs: 'productList',
       controller: function controller(PharzoneShop, $scope) {
-        $log.debug('Testing PharzoneShop service from product-list directive', PharzoneShop.test);
         var vm = this;
         var db = PharzoneShop.db;
         vm.name = 'productList';
@@ -44,7 +43,7 @@
                 db.$$state.value.$save();*/
               });
             } else {
-                getDb();$log.debug('getting data..');
+                getDb();
               }
           }, 500);
         };

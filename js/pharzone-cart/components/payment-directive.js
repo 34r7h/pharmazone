@@ -29,18 +29,14 @@
       replace: false,
       controllerAs: 'payment',
       controller: function controller(PharzoneCart) {
-        $log.debug('Testing PharzoneCart service from payment directive', PharzoneCart.test);
         var vm = this;
         vm.name = 'payment';
         vm.promise = PharzoneCart.promise;
         vm.order = PharzoneCart.orders;
-        setTimeout(function () {
-          $log.debug('order for payment', vm.order);
-        }, 2000);
+
         /*
                 vm.order = PharzoneCart.orders.$$state.value[$state.params.order];
         */
-        $log.debug('order for payment', vm);
       },
       link: function link(scope, element, attrs) {
         /*jshint unused:false */

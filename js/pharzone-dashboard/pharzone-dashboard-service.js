@@ -12,6 +12,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, PharzoneDashboard);
 
       this.test = Pharzone.test;
+      this.db = Pharzone.data.db;
+      this.newDeal = Pharzone.api.make;
+      this.save = Pharzone.api.save;
+      this.products = Pharzone.data.db.products;
     }
 
     /**

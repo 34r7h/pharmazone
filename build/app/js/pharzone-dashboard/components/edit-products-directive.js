@@ -28,7 +28,7 @@
       templateUrl: 'pharzone-dashboard/components/edit-products-directive.tpl.html',
       replace: false,
       controllerAs: 'editProducts',
-      controller: function controller(PharzoneDashboard) {
+      controller: function controller(PharzoneDashboard, $scope) {
         $log.debug('Testing PharzoneDashboard service from edit-products directive', PharzoneDashboard.test);
         var vm = this;
         vm.name = 'editProducts';

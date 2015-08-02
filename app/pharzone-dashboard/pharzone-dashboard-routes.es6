@@ -12,15 +12,11 @@
         template:'<ui-view></ui-view>'
       })
       .state('pharzone.dashboard.edit', {
-        url: '/edit',
-        template: '<edit-products></edit-products><ui-view></ui-view>'
-      })
-      .state('pharzone.dashboard.edit.product', {
-        url: '/:product',
+        url: '/products',
         template: '<edit-products></edit-products>'
       })
       .state('pharzone.dashboard.account', {
-        url: '/:user',
+        url: '/user/:user',
         template: '<account></account>'
       });
   }

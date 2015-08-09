@@ -8,7 +8,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   'use strict';
 
   var Pharzone = (function () {
-    function Pharzone($log, $state, $firebaseObject, $rootScope, $firebaseAuth) {
+    function Pharzone($log, $state, $firebaseObject, $firebaseArray, $rootScope, $firebaseAuth) {
       var _this = this;
 
       _classCallCheck(this, Pharzone);
@@ -304,6 +304,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
           }).then(function (authData) {
             console.log("Logged in as:", authData.uid);
+            $rootScope.user = authData.uid;
           })['catch'](function (error) {
             console.error("Error: ", error);
           });
@@ -319,6 +320,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           console.log(userIs);
         },
         deleteUser: function deleteUser(email, pass) {
+          // TODO Clean up lingering db entries
           console.log("Deleting User: ", email + ': ' + pass);
           var ref = new Firebase("https://pharzone.firebaseio.com");
           var authObj = $firebaseAuth(ref);
@@ -357,14 +359,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }, 500);
         },
-        save: function save() {},
-        make: function make(type, object) {
-          var ref = new Firebase('https://pharzone.firebaseio.com/');
-          var obj = $firebaseObject(ref).$loaded().then(function (data) {
-            var lastIndex = data[type].length;
-            data[type][lastIndex] = object;
-            data.$save().then(function (ref) {
-              ref.key() === obj.$id; // true
+        save: function save(productId, user, type, object) {
+          var ref = new Firebase('https://pharzone.firebaseio.com/users/' + user + '/' + type);
+          var obj = $firebaseObject(ref);
+          $log.debug(obj, object);
+          obj[productId] = object;
+          obj.$save().then(function (ref) {
+            ref.key() === obj.$id; // true
+          }, function (error) {
+            console.log("Error:", error);
+          });
+        },
+        make: function make(user, type, object) {
+          var ref = new Firebase('https://pharzone.firebaseio.com/users/' + user + '/' + type);
+          var obj = $firebaseArray(ref);
+          obj.$loaded().then(function (data) {
+            data.$add(object).then(function (ref) {
+              var id = ref.key();
+              console.log("added record with id " + id);
             }, function (error) {
               console.log("Error:", error);
             });

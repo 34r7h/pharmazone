@@ -1,6 +1,6 @@
 <div class="row">
     <h2>Add New Deal</h2>
-    <form ng-init="newDeal = {}" ng-submit="editProducts.newDeal('products',newDeal)">
+    <form ng-init="newDeal = {}" ng-submit="editProducts.newDeal($root.user, 'products',newDeal)">
         <div class="row">
             <div class="large-6 columns">
                 <label>Product Name
@@ -73,14 +73,14 @@
     </form>
 
     <h2>Edit deals</h2>
-    <div ng-repeat="product in editProducts.products" class="row">
+    <div ng-repeat="(key, product) in editProducts.products" class="row">
         <h4 class="large-9">{{product.name}}</h4>
         <img class="large-3" ng-src="{{product.image}}" alt=""/>
 
-        <form ng-submit="editProducts.save('products', product)">
+        <form ng-submit="editProducts.save(key, $root.user, 'products', product)">
             <div class="small-12 columns" ng-repeat="(key,input) in product" >
                 <label for="{{key}}">{{key}}</label>
-                <input id="{{key}}" ng-model="input"/>
+                <input id="{{key}}" ng-model="$parent.product[key]"/>
             </div>
             <button type="submit">Save Changes</button>
         </form>

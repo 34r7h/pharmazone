@@ -2,7 +2,7 @@
   'use strict';
 
   class Pharzone {
-    constructor($log, $state, $firebaseObject, $rootScope, $firebaseAuth) {
+    constructor($log, $state, $firebaseObject, $firebaseArray, $rootScope, $firebaseAuth) {
       $log.info('Starting App Services');
 /*
       this.promise = (target, data)=> {
@@ -301,6 +301,7 @@
             });
           }).then(function(authData) {
             console.log("Logged in as:", authData.uid);
+            $rootScope.user = authData.uid;
           }).catch(function(error) {
             console.error("Error: ", error);
           });
@@ -316,6 +317,7 @@
           console.log(userIs);
         },
         deleteUser: (email, pass)=>{
+          // TODO Clean up lingering db entries
           console.log("Deleting User: ", email + ': '+pass);
           let ref = new Firebase("https://pharzone.firebaseio.com");
           var authObj = $firebaseAuth(ref);
@@ -354,16 +356,25 @@
             }
           }, 500);
         },
-        save: ()=>{
-
+        save: (productId, user, type, object)=>{
+          let ref = new Firebase('https://pharzone.firebaseio.com/users/'+user+'/'+type);
+          var obj = $firebaseObject(ref);
+          $log.debug(obj, object);
+          obj[productId] = object;
+          obj.$save().then(function(ref) {
+            ref.key() === obj.$id; // true
+          }, function(error) {
+            console.log("Error:", error);
+          });
         },
-        make: (type, object)=>{
-           let ref = new Firebase('https://pharzone.firebaseio.com/');
-           var obj = $firebaseObject(ref).$loaded().then((data)=>{
-             let lastIndex = data[type].length;
-             data[type][lastIndex] = object;
-             data.$save().then(function(ref) {
-               ref.key() === obj.$id; // true
+        make: (user, type, object)=>{
+           let ref = new Firebase('https://pharzone.firebaseio.com/users/'+user+'/'+type);
+           var obj = $firebaseArray(ref);
+           obj.$loaded().then((data)=>{
+             data.$add(object)
+               .then(function(ref) {
+                 var id = ref.key();
+                 console.log("added record with id " + id);
              }, function(error) {
                console.log("Error:", error);
              });

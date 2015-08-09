@@ -16,7 +16,7 @@
         template: '<product-list></product-list>'
       })
       .state('pharzone.shop.product', {
-        url: '/shop/:product',
+        url: '/shop/:user/:product',
         template: '<product></product>'
       });
   }

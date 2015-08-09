@@ -11,7 +11,7 @@
     </dd>
 
 </dl>
-<div ng-repeat="product in productList.products" class="large-4 medium-6 small-12 columns">
+<div ng-repeat="(key,product) in productList.products" class="large-4 medium-6 small-12 columns">
     <div class="panel">
         <h3>{{product.name}}</h3>
         <p class="">
@@ -21,7 +21,7 @@
         <hr/>
         <input class="small-1 columns" type="number" ng-model="qty" placeholder="How many would you like to order?"/>
         <ul class="button-group round even text-right">
-            <li><a ng-href="#/shop/{{product.url}}" class="button info">More Info</a></li>
+            <li><a ng-href="#/shop/{{product.user}}/{{product.id}}" class="button info">More Info</a></li>
             <li><a class="button" ng-click="productList.addToCart(product, productList.cart, qty)">Buy Now</a></li>
         </ul>
     </div>

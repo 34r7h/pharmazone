@@ -31,14 +31,16 @@
       controller(PharzoneShop, $state, $scope) {
         let vm = this;
         let db = PharzoneShop.db;
-        var url = $state.params.product;
+        vm.productId = $state.params.product;
+        vm.userId = $state.params.user;
+        // TODO fix single products based on user & product id
         var getDb = (()=> {
           setTimeout(()=> {
             if (db.$$state.value) {
               $scope.$apply( ()=> {
-                vm.productIndex = PharzoneShop.productsIndex[url];
+                vm.productIndex = PharzoneShop.productsIndex[key];
                 vm.product = db.$$state.value.products[vm.productIndex];
-                // $log.debug('vm.product', vm.product);
+                $log.debug('vm.product', vm.product);
                 vm.name = vm.productName;
                 vm.addToCart = PharzoneShop.addToCart;
                 vm.cart = PharzoneShop.cart;

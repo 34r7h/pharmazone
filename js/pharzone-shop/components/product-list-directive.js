@@ -38,7 +38,14 @@
           setTimeout(function () {
             if (db.$$state.value) {
               $scope.$apply(function () {
-                vm.products = db.$$state.value.products;
+                vm.products = [];
+                angular.forEach(db.$$state.value.users, function (user, userkey) {
+                  angular.forEach(user.products, function (product, key) {
+                    product.id = key;
+                    product.user = userkey;
+                    vm.products.push(product);
+                  });
+                });
                 /*vm.products.push({name:'fasdf'});
                 db.$$state.value.$save();*/
               });

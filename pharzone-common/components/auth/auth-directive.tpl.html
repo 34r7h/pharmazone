@@ -1,0 +1,50 @@
+<div class="row">
+    <div ng-if="!$root.user">
+
+
+        <h3><b ng-show="!show.register">Login</b><a ng-show="show.register" ng-click="show.register = !show.register">Login</a> / <b ng-show="show.register">Register</b><a ng-show="!show.register" ng-click="show.register = !show.register">Register</a></h3>
+        <div ng-show="!show.register">
+            <form name="login" ng-submit="auth.login(auth.email, auth.pass)" class="small-12 columns">
+                <input type="email" ng-model="auth.email"/>
+                <input type="password" ng-model="auth.pass"/>
+                <button href="" type="submit" class="button">Login</button>
+            </form>
+        </div>
+
+        <div ng-show="show.register">
+        <form name="register" ng-submit="auth.register(auth.email, auth.pass, auth.name)" class="small-12 columns">
+            <input type="email" ng-model="auth.email" placeholder="Your Email"/>
+            <input type="text" ng-model="auth.name" placeholder="Your Name"/>
+            <input type="password" ng-model="auth.pass" placeholder="Your Password"/>
+            <button type="submit" class="button">Register</button>
+        </form></div>
+
+    </div>
+
+    <div ng-if="$root.user">
+        <form name="update" ng-submit="auth.updateUser($root.user, auth.user.value[$root.user].name, auth.user.value[$root.user].email, auth.pass)">
+            <label for="username">Name</label><input id="username" type="text" ng-model="auth.user.value[$root.user].name"/>
+            <label for="email">Email</label><input id="email" type="text" ng-model="auth.user.value[$root.user].email"/>
+
+            <div class="row collapse">
+                <div class="small-8 columns">
+                    <input type="password" placeholder="Enter Password to Save Change" ng-model="auth.pass">
+                </div>
+                <div class="small-4 columns">
+                    <button type="submit" class="button postfix">Update</button>
+                </div>
+            </div>
+
+        </form>
+
+        <a href="" ng-click="show.deleteUser = true">Delete Account?</a>
+
+        <form name="delete-user" ng-show="show.deleteUser" ng-submit="auth.deleteUser(auth.email, auth.pass)">
+            <input type="email" ng-model="auth.email" placeholder="Enter Your Email"/>
+            <input type="password" ng-model="auth.pass" placeholder="Enter Your Password"/>
+            <button type="submit" class="button alert">Delete Account</button>
+        </form>
+
+    </div>
+
+</div>

@@ -2,7 +2,8 @@
   'use strict';
 
   class Pharzone {
-    constructor($log, $state, $firebaseObject, $rootScope) {
+    constructor($log, $state, $firebaseObject, $rootScope, $firebaseAuth) {
+      $log.info('Starting App Services');
 /*
       this.promise = (target, data)=> {
         $log.debug('Promising data..', target +': '+data);
@@ -20,9 +21,28 @@
       };
 */
       let vm = this;
+      let ref = new Firebase("https://pharzone.firebaseio.com");
       this.test = 'ALL SYSTEMS OPERATIONAL';
       this.cart = {};
       this.index = {products:{},users:{},orders:{}};
+      var authObj = $firebaseAuth(ref);
+      this.auth = authObj.$getAuth();
+      $rootScope.unauth = ()=>{
+        console.log('logging out');
+        let ref = new Firebase("https://pharzone.firebaseio.com");
+        var authObj = $firebaseAuth(ref);
+        var userIs = authObj.$getAuth();
+        console.log(userIs);
+        authObj.$unauth();
+        $rootScope.user = authObj.$getAuth();
+        console.log(userIs);
+      };
+      if (this.auth) {
+        console.log("Logged in as:", this.auth.uid);
+        $rootScope.user = this.auth.uid;
+      } else {
+        console.log("Logged out");
+      }
 
       /*
       this.dummyData = {
@@ -202,6 +222,126 @@
       */
 
 	    this.api = {
+        updateUser: (user, name, email, pass)=>{
+          console.log('updating', user +' '+ name +' '+ email);
+          var oldEmail = '';
+          let ref = new Firebase("https://pharzone.firebaseio.com/users/"+user);
+          var dbObj = $firebaseObject(ref).$loaded().then((data)=>{
+            oldEmail = data.email;
+            data.name = name;
+            data.email = email;
+            data.$save().then(()=>{
+              if(email !== oldEmail){
+                let authRef = new Firebase("https://pharzone.firebaseio.com/");
+                var authObj = $firebaseAuth(authRef);
+                authObj.$changeEmail({
+                  oldEmail: oldEmail,
+                  newEmail: email,
+                  password: pass
+                }).then(function() {
+                  console.log("Email changed successfully!");
+                }).catch(function(error) {
+                  console.error("Error: ", error);
+                });
+                let ref = new Firebase("https://pharzone.firebaseio.com/index/users/email");
+                var dbObj = $firebaseObject(ref).$loaded().then((data)=>{
+                  data[email.replace('.','`')] = user;
+                  data[oldEmail.replace('.','`')] = null;
+                  data.$save();
+
+                })
+              }
+
+            })
+          });
+        },
+        login: (email, pass)=>{
+          console.log("Logging in as:", email + ': '+pass);
+          let ref = new Firebase("https://pharzone.firebaseio.com");
+          var authObj = $firebaseAuth(ref);
+          authObj.$authWithPassword({
+            email: email,
+            password: pass
+          }).then(function(authData) {
+            console.log("Logged in as:", authData.uid);
+            $rootScope.user = authData.uid;
+          }).catch(function(error) {
+            console.error("Authentication failed:", error);
+          });
+        },
+        register: (email, pass, name)=>{
+          console.log('registering user', email + ': '+ pass);
+          let ref = new Firebase("https://pharzone.firebaseio.com");
+          var authObj = $firebaseAuth(ref);
+          authObj.$createUser({
+            email: email,
+            password: pass
+          }).then(function(userData) {
+            let ref = new Firebase("https://pharzone.firebaseio.com/users");
+            var dbObj = $firebaseObject(ref).$loaded().then((data)=>{
+              userData.email = email;
+              userData.name = name;
+              data[userData.uid] = userData;
+              data.$save().then(()=>{
+                // Indexing users by email
+                console.log('indexing...');
+                let ref = new Firebase("https://pharzone.firebaseio.com/index/users/email");
+                var dbIndex = $firebaseObject(ref).$loaded().then((data)=>{
+                  var cleanEmail = email.replace('.','`');
+                  data[cleanEmail] = userData.uid;
+                  data.$save()
+                });
+              });
+              console.log("User " + userData.uid + " created successfully!");
+            });
+
+            return authObj.$authWithPassword({
+              email: email,
+              password: pass
+            });
+          }).then(function(authData) {
+            console.log("Logged in as:", authData.uid);
+          }).catch(function(error) {
+            console.error("Error: ", error);
+          });
+        },
+        unauth: ()=>{
+          console.log('logging out');
+          let ref = new Firebase("https://pharzone.firebaseio.com");
+          var authObj = $firebaseAuth(ref);
+          var userIs = authObj.$getAuth();
+          console.log(userIs);
+          authObj.$unauth();
+          $rootScope.user = authObj.$getAuth();
+          console.log(userIs);
+        },
+        deleteUser: (email, pass)=>{
+          console.log("Deleting User: ", email + ': '+pass);
+          let ref = new Firebase("https://pharzone.firebaseio.com");
+          var authObj = $firebaseAuth(ref);
+          authObj.$removeUser({
+            email: email,
+            password: pass
+          }).then(function() {
+            let ref = new Firebase("https://pharzone.firebaseio.com/users");
+              var dbObj = $firebaseObject(ref).$loaded().then((data)=>{
+                data[$rootScope.user] = null;
+                data.$save().then(()=>{
+                  // De-indexing users by email
+                  console.log('de-indexing...');
+                  let ref = new Firebase("https://pharzone.firebaseio.com/index/users/email");
+                  var dbIndex = $firebaseObject(ref).$loaded().then((data)=>{
+                    var cleanEmail = email.replace('.','`');
+                    data[cleanEmail] = null;
+                    data.$save()
+                  });
+                });
+              });
+            console.log("User removed successfully!");
+          }).catch(function(error) {
+            console.error("Error: ", error);
+          });
+        },
         promise: (target, data)=> {
           setTimeout(()=> {
             if (data) {
@@ -221,7 +361,7 @@
            let ref = new Firebase('https://pharzone.firebaseio.com/');
            var obj = $firebaseObject(ref).$loaded().then((data)=>{
              let lastIndex = data[type].length;
-             data.products[lastIndex] = object;
+             data[type][lastIndex] = object;
              data.$save().then(function(ref) {
                ref.key() === obj.$id; // true
              }, function(error) {

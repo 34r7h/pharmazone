@@ -8,6 +8,6 @@
    * @description
    *
    */
-  angular.module('pharzone', ['firebase', 'ui.router', 'mm.foundation', 'pharzoneHome', 'pharzoneCart', 'pharzoneShop', 'pharzoneDashboard']);
+  angular.module('pharzone', ['firebase', 'ui.router', 'mm.foundation', 'pharzoneHome', 'pharzoneCart', 'pharzoneShop', 'pharzoneDashboard', 'pharzoneCommon']);
 })();
 //# sourceMappingURL=app-module.js.map

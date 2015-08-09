@@ -2,7 +2,7 @@
   'use strict';
 
   class PharzoneHome {
-    constructor() {
+    constructor(Pharzone) {
       this.test = Pharzone.test;
     }
 

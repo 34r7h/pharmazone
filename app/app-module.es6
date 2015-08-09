@@ -14,6 +14,7 @@
       'pharzoneHome',
       'pharzoneCart',
       'pharzoneShop',
-      'pharzoneDashboard'
+      'pharzoneDashboard',
+      'pharzoneCommon'
     ]);
 }());

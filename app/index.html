@@ -43,9 +43,14 @@
             <a data-ui-sref='pharzone.cart'>Cart</a>
           </li>
         </ul>
+        <ul class='right'>
+          <li>
+            <a href="" ng-if="$root.user" ng-click="$root.unauth()">Logout</a>
+          </li>
+
+        </ul>
       </div>
     </div>
-
     <div data-ui-view>
 
     </div>

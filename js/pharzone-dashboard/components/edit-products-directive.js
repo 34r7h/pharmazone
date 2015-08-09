@@ -21,7 +21,7 @@
    */
   angular.module('pharzoneDashboard').directive('editProducts', editProducts);
 
-  function editProducts($log) {
+  function editProducts($log, $rootScope) {
     return {
       restrict: 'EA',
       scope: {},
@@ -38,7 +38,7 @@
           setTimeout(function () {
             if (db.$$state.value) {
               $scope.$apply(function () {
-                vm.products = db.$$state.value.products;
+                vm.products = db.$$state.value.users[$rootScope.user].products;
                 /*vm.products.push({name:'fasdf'});
                  db.$$state.value.$save();*/
               });

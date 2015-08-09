@@ -12,6 +12,7 @@
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="css/pharzone-cart/pharzone-cart.css">
+    <link rel="stylesheet" href="css/pharzone-common/pharzone-common.css">
     <link rel="stylesheet" href="css/pharzone-dashboard/pharzone-dashboard.css">
     <link rel="stylesheet" href="css/pharzone-home/pharzone-home.css">
     <link rel="stylesheet" href="css/pharzone-shop/pharzone-shop.css">
@@ -48,9 +49,14 @@
             <a data-ui-sref='pharzone.cart'>Cart</a>
           </li>
         </ul>
+        <ul class='right'>
+          <li>
+            <a href="" ng-if="$root.user" ng-click="$root.unauth()">Logout</a>
+          </li>
+
+        </ul>
       </div>
     </div>
-
     <div data-ui-view>
 
     </div>
@@ -78,12 +84,16 @@
     <script src="js/pharzone-dashboard/pharzone-dashboard-module.js"></script>
     <script src="js/pharzone-dashboard/pharzone-dashboard-service.js"></script>
     <script src="js/pharzone-dashboard/pharzone-dashboard-routes.js"></script>
+    <script src="js/pharzone-common/pharzone-common-module.js"></script>
+    <script src="js/pharzone-common/pharzone-common-routes.js"></script>
+    <script src="js/pharzone-common/pharzone-common-controller.js"></script>
     <script src="js/pharzone-cart/pharzone-cart-module.js"></script>
     <script src="js/pharzone-cart/pharzone-cart-service.js"></script>
     <script src="js/pharzone-cart/pharzone-cart-routes.js"></script>
     <script src="js/app-module.js"></script>
     <script src="js/pharzone-service.js"></script>
     <script src="js/app-routes.js"></script>
+    <script src="js/pharzone-common/components/auth/auth-directive.js"></script>
     <script src="js/pharzone-shop/components/product-list-directive.js"></script>
     <script src="js/pharzone-shop/components/product-directive.js"></script>
     <script src="js/pharzone-dashboard/components/edit-products-directive.js"></script>

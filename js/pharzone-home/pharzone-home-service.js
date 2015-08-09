@@ -8,7 +8,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   'use strict';
 
   var PharzoneHome = (function () {
-    function PharzoneHome() {
+    function PharzoneHome(Pharzone) {
       _classCallCheck(this, PharzoneHome);
 
       this.test = Pharzone.test;
